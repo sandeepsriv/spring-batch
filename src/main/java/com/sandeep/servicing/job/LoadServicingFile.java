@@ -123,11 +123,5 @@ public class LoadServicingFile {
         return simpleAsyncTaskExecutor;
     }
 
-    @Bean
-    public ExecutionContext executionContext() {
-
-        return new ExecutionContext();
-
-    }
 
 }

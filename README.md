@@ -3,12 +3,12 @@
 ## Spring Batch proof of concept
 
 - Project was done using IntelliJIDEA IDE 
-- I have used MySQL DB
+- Project uses MySQL DB
 - JSON file is in the resource folder. You can modify this file
 - Start the Spring Boot application
 - To run the job, enter following in your browser - http://localhost:8080/run/job
     
- ##   Project Sekelton
+ ##   Project skeleton
  
  Base code for the project was generated on Spring Initializr with following dependencies
     

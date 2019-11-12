@@ -8,6 +8,7 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,13 @@ public class JobRunner {
     private static final Logger logger = LoggerFactory.getLogger(JobRunner.class);
     private JobLauncher simpleJobLauncher;
     private Job servicingJob;
+    private ExecutionContext executionContext;
 
     @Autowired
-    public JobRunner(Job servicingJob, JobLauncher jobLauncher) {
+    public JobRunner(Job servicingJob, JobLauncher jobLauncher, ExecutionContext executionContext) {
         this.simpleJobLauncher = jobLauncher;
         this.servicingJob = servicingJob;
+        this.executionContext = executionContext;
     }
 
     @Async
@@ -32,6 +35,7 @@ public class JobRunner {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
         jobParametersBuilder.addString(Constants.FILE_NAME_CONTEXT_KEY, "loanservicing.json");
         jobParametersBuilder.addDate("date", new Date(), true);
+        executionContext.putString("#NAS_Filename", "loanservicing.json");
         runJob(servicingJob, jobParametersBuilder.toJobParameters());
     }
 

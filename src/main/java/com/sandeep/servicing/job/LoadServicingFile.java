@@ -11,6 +11,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -104,6 +105,7 @@ public class LoadServicingFile {
 
     @Bean
     public JdbcBatchItemWriter<LoanServicing> loanServicingDBWriterDefault() {
+
         JdbcBatchItemWriter<LoanServicing> itemWriter = new JdbcBatchItemWriter<LoanServicing>();
         itemWriter.setDataSource(dataSource);
         System.out.println("#JdbcBatchItemWriter START");
@@ -111,6 +113,7 @@ public class LoadServicingFile {
         itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<LoanServicing>());
         System.out.println("#JdbcBatchItemWriter END");
         return itemWriter;
+
     }
 
     @Bean
@@ -118,6 +121,13 @@ public class LoadServicingFile {
         SimpleAsyncTaskExecutor simpleAsyncTaskExecutor = new SimpleAsyncTaskExecutor();
         simpleAsyncTaskExecutor.setConcurrencyLimit(5);
         return simpleAsyncTaskExecutor;
+    }
+
+    @Bean
+    public ExecutionContext executionContext() {
+
+        return new ExecutionContext();
+
     }
 
 }

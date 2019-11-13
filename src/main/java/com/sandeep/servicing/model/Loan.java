@@ -1,10 +1,15 @@
-package com.sandeep.servicing.dto;
+package com.sandeep.servicing.model;
 
 import lombok.Data;
 
-@Data
-public class LoanServicingDTO {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Data
+@Entity
+public class Loan {
+
+    @Id
     private String loanIdSysGen;
     private int upb;
     private int noteRate;

@@ -11,12 +11,12 @@ url: http://localhost:8080/run/job
 
 @RestController
 @RequestMapping("/run")
-public class JobController {
+public class JobRESTController {
 
     private JobRunner jobRunner;
 
     @Autowired
-    public JobController(JobRunner jobRunner) {
+    public JobRESTController(JobRunner jobRunner) {
         this.jobRunner = jobRunner;
     }
 
